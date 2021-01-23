@@ -4,11 +4,13 @@ ARG REVIEW_CONFIG_FILE
 
 COPY setup.sh ./
 COPY package.json ./
-#RUN apt update -y && apt install -y texlive-fonts-extra && ./setup.sh 
-RUN apt update -y 
-RuN apt install -y texlive-fonts-extra 
-#RUN ./setup.sh 
+COPY Gemfile ./
+
+RUN apt update -y && \
+  apt install -y texlive-fonts-extra && \
+  apt clean && \
+  rm -rf /var/lib/apt/lists/* && \
+  ./setup.sh 
 
 # REVIEW_CONFIG_FILE=$REVIEW_CONFIG_FILE npm run pdf"
-
-ENTRYPOINT ["npm run pdf"]
+CMD ["/bin/bash"]
