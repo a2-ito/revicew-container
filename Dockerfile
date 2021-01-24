@@ -7,7 +7,7 @@ COPY package.json ./
 COPY Gemfile ./
 
 RUN apt-get update -y \
-  && apt-get install -y texlive-fonts-extra=2018.20190227-2 \
+  && apt-get install -y --no-install-recommends texlive-fonts-extra=2018.20190227-2 \
   && apt-get clean \
   && rm -rf /var/lib/apt/lists/* \
   && ./setup.sh 
